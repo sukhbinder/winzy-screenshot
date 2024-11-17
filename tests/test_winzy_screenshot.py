@@ -1,8 +1,6 @@
 import pytest
 import os
 
-os.environ['DISPLAY'] = ':0'
-
 import winzy_screenshot as w
 from argparse import ArgumentParser
 
