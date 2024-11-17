@@ -124,9 +124,10 @@ class HelloWorld:
     @winzy.hookimpl
     def register_commands(self, subparser):
         parser = create_parser(subparser)
-        parser.set_defaults(func=self.hello)
+        parser.set_defaults(func=self.main)
 
     def main(self, args):
+        print("Press left shift to take a screenshot. Esc twice to end.")
         if args.bbox:
             bboxes = args.bbox
         else:

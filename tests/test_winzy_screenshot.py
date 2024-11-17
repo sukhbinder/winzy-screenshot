@@ -1,7 +1,12 @@
 import pytest
-import winzy_screenshot as w
+import os
 
-from argparse import Namespace, ArgumentParser
+os.environ['DISPLAY'] = ':0'
+
+import winzy_screenshot as w
+from argparse import ArgumentParser
+
+
 
 def test_create_parser():
     subparser = ArgumentParser().add_subparsers()
