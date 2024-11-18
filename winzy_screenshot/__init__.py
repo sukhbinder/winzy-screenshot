@@ -1,14 +1,13 @@
 import winzy
-import pyautogui
 import datetime
 import logging
-import argparse
 from pynput import keyboard
-from PIL import Image
+from PIL import Image, ImageGrab
 from typing import Tuple
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
+
 
 class ScreenshotManager:
     def __init__(self, bboxes: list[Tuple[float, float, float, float]]):
@@ -25,7 +24,7 @@ class ScreenshotManager:
         """
         Takes a screenshot and returns it as a PIL Image.
         """
-        return pyautogui.screenshot()
+        return ImageGrab.grab()
 
     def save_image(self, image: Image, filename: str) -> None:
         """
@@ -41,7 +40,9 @@ class ScreenshotManager:
         except Exception as e:
             logging.error(f"Failed to save image: {e}")
 
-    def crop_image(self, image: Image, bbox: Tuple[float, float, float, float]) -> Image:
+    def crop_image(
+        self, image: Image, bbox: Tuple[float, float, float, float]
+    ) -> Image:
         """
         Crops the image using the provided bounding box percentages.
 
@@ -78,7 +79,7 @@ class ScreenshotManager:
         elif key == keyboard.Key.shift_l:
             # Capture and save original screenshot
             screenshot = self.take_screenshot()
-            print('\a', flush=True)
+            print("\a", flush=True)
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             original_filename = f"screenshot_{timestamp}.png"
             self.save_image(screenshot, original_filename)
@@ -99,7 +100,9 @@ class ScreenshotManager:
         """
         Starts the keyboard listener.
         """
-        with keyboard.Listener(on_press=self.on_press, on_release=self.on_release) as listener:
+        with keyboard.Listener(
+            on_press=self.on_press, on_release=self.on_release
+        ) as listener:
             listener.join()
 
 
@@ -112,13 +115,15 @@ def create_parser(subparser):
         nargs=4,
         type=float,
         action="append",
-        help="Bounding box as left,top,width,height in percentages (can be specified multiple times)")
+        help="Bounding box as left,top,width,height in percentages (can be specified multiple times)",
+    )
 
     return parser
 
 
 class HelloWorld:
-    """ Screenshot using python  """
+    """Screenshot using python"""
+
     __name__ = "screenshot"
 
     @winzy.hookimpl
@@ -135,9 +140,10 @@ class HelloWorld:
 
         manager = ScreenshotManager(bboxes)
         manager.start_listener()
-    
+
     def hello(self, args):
         # this routine will be called when "winzy screenshot is called."
         print("Hello! This is an example ``winzy`` plugin.")
+
 
 screenshot_plugin = HelloWorld()

@@ -5,7 +5,6 @@ import winzy_screenshot as w
 from argparse import ArgumentParser
 
 
-
 def test_create_parser():
     subparser = ArgumentParser().add_subparsers()
     parser = w.create_parser(subparser)
@@ -16,7 +15,8 @@ def test_create_parser():
     assert result.bbox is None
 
     result = parser.parse_args(["-b", "0", "10", "20", "50"])
-    assert result.bbox == [[0,10,20,50]]
+    assert result.bbox == [[0, 10, 20, 50]]
+
 
 def test_plugin(capsys):
     w.screenshot_plugin.hello(None)

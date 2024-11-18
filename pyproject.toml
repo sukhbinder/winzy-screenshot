@@ -1,6 +1,6 @@
 [project]
 name = "winzy-screenshot"
-version = "0.0.1"
+version = "0.0.2"
 description = "Screenshot using python "
 readme = "README.md"
 authors = [{name = "Sukhbinder Singh"}]
@@ -10,7 +10,6 @@ classifiers = [
 ]
 dependencies = [
     "winzy",
-    "pyautogui",
     "pynput",
     "pillow",
 ]
