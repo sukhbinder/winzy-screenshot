@@ -17,7 +17,14 @@ pip install winzy-screenshot
 ```
 ## Usage
 
-Usage instructions go here.
+To use
+
+```bash
+winzy screenshot -b 7.57 8.11 70.14 51.0
+```
+
+![winzy screenshot demo](winzy-screenshot-demo.gif)
+
 
 ## Development
 
