@@ -76,7 +76,7 @@ class ScreenshotManager:
             if self.esc_pressed_count >= 2:
                 logging.info("Exiting on double ESC press.")
                 return False
-        elif key == keyboard.Key.shift_l:
+        elif key == keyboard.Key.shift_r:
             # Capture and save original screenshot
             screenshot = self.take_screenshot()
             print("\a", flush=True)
@@ -132,7 +132,7 @@ class HelloWorld:
         parser.set_defaults(func=self.main)
 
     def main(self, args):
-        print("Press left shift to take a screenshot. Esc twice to end.")
+        print("Press `Right shift` to take a screenshot. Esc twice to end.")
         if args.bbox:
             bboxes = args.bbox
         else:
