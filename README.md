@@ -28,6 +28,27 @@ Press `Right shift` to take a screenshot. Esc twice to end.
 ![winzy screenshot demo](https://raw.githubusercontent.com/sukhbinder/winzy-screenshot/main/winzy-screenshot-demo.gif)
 
 
+
+To Get help, type.
+
+```bash
+winzy screenshot -h
+
+usage: winzy screenshot [-h] [-b BBOX BBOX BBOX BBOX] [-ut] [-t TITLE]
+
+Screenshot using python
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BBOX BBOX BBOX BBOX, --bbox BBOX BBOX BBOX BBOX
+                        Bounding box as left,top,width,height in percentages
+                        (can be specified multiple times)
+  -ut, --use-tempdir    Use tempdir to save the screenshots
+  -t TITLE, --title TITLE
+                        Create BBOX for the windows whose title is given.
+
+
+```
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:
