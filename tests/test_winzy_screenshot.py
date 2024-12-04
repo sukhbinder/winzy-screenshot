@@ -16,6 +16,9 @@ def test_create_parser():
 
     result = parser.parse_args(["-b", "0", "10", "20", "50"])
     assert result.bbox == [[0, 10, 20, 50]]
+    assert result.title is None
+    assert result.use_tempdir == False
+    
 
 
 def test_plugin(capsys):

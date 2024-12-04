@@ -4,6 +4,9 @@ import logging
 from pynput import keyboard
 from PIL import Image, ImageGrab
 from typing import Tuple
+import tempfile
+import os
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -118,6 +121,21 @@ def create_parser(subparser):
         help="Bounding box as left,top,width,height in percentages (can be specified multiple times)",
     )
 
+    parser.add_argument(
+        "-ut",
+        "--use-tempdir",
+        action="store_true",
+        help="Use tempdir to save the screenshots",
+    )
+
+    parser.add_argument(
+        "-t",
+        "--title",
+        type=str,
+        default=None,
+        help="Create BBOX for the windows whose title is given.",
+    )
+
     return parser
 
 
@@ -132,14 +150,27 @@ class HelloWorld:
         parser.set_defaults(func=self.main)
 
     def main(self, args):
-        print("Press `Right shift` to take a screenshot. Esc twice to end.")
-        if args.bbox:
-            bboxes = args.bbox
-        else:
-            bboxes = []
+        bboxes = args.bbox if args.bbox else []
 
+        cwd = os.getcwd()
+        if args.use_tempdir:
+            tempdir = tempfile.gettempdir()
+            print(f"Saving screenshots: {tempdir}")
+            os.chdir(tempdir)
+
+        if args.title:
+            from winzy_win_geometry import get_window_geometry_percentage
+
+            win = get_window_geometry_percentage(args.title)
+            if win:
+                bboxes.append([win["x"], win["y"], win["width"], win["height"]])
+
+        print("Press `Right shift` to take a screenshot. Esc twice to end.")
         manager = ScreenshotManager(bboxes)
         manager.start_listener()
+
+        if args.use_tempdir:
+            os.chdir(cwd)
 
     def hello(self, args):
         # this routine will be called when "winzy screenshot is called."
