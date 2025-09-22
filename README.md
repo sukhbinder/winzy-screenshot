@@ -5,7 +5,7 @@
 [![Tests](https://github.com/sukhbinder/winzy-screenshot/workflows/Test/badge.svg)](https://github.com/sukhbinder/winzy-screenshot/actions?query=workflow%3ATest)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/sukhbinder/winzy-screenshot/blob/main/LICENSE)
 
-Screenshot using python 
+Screenshot using python
 
 ## Installation
 
@@ -45,8 +45,8 @@ optional arguments:
                         (can be specified multiple times)
   -ut, --use-tempdir    Use tempdir to save the screenshots
   -t TITLE, --title TITLE
-                        Create BBOX for the windows whose title is given.
-
+                        Create BBOX for the windows whose title is given. type
+                        'none' to choose window
 
 ```
 ## Development
