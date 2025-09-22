@@ -133,7 +133,7 @@ def create_parser(subparser):
         "--title",
         type=str,
         default=None,
-        help="Create BBOX for the windows whose title is given.",
+        help="Create BBOX for the windows whose title is given. type 'none' to choose window",
     )
 
     return parser
@@ -161,7 +161,10 @@ class HelloWorld:
         if args.title:
             from winzy_win_geometry import get_window_geometry_percentage
 
-            win = get_window_geometry_percentage(args.title)
+            if args.title.lower() == "none":
+                win = get_window_geometry_percentage()
+            else:
+                win = get_window_geometry_percentage(args.title)
             if win:
                 bboxes.append([win["x"], win["y"], win["width"], win["height"]])
 
