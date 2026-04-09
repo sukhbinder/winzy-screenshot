@@ -1,6 +1,6 @@
 [project]
 name = "winzy-screenshot"
-version = "0.0.5"
+version = "0.0.6"
 description = "Screenshot using python "
 readme = "README.md"
 authors = [{name = "Sukhbinder Singh"}]
@@ -13,6 +13,7 @@ dependencies = [
     "pynput",
     "pillow",
     "winzy-win-geometry",
+    "screenrecord",
 ]
 
 [project.urls]

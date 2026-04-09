@@ -6,7 +6,7 @@ from PIL import Image, ImageGrab
 from typing import Tuple
 import tempfile
 import os
-
+from screenrecord.srecord import get_win_size
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
@@ -136,6 +136,13 @@ def create_parser(subparser):
         help="Create BBOX for the windows whose title is given. type 'none' to choose window",
     )
 
+    parser.add_argument(
+        "-aw",
+        "--activewindow",
+        action="store_true",
+        help="Capture the active window",
+    )
+
     return parser
 
 
@@ -157,7 +164,25 @@ class HelloWorld:
             tempdir = tempfile.gettempdir()
             print(f"Saving screenshots: {tempdir}")
             os.chdir(tempdir)
-
+        
+        if args.activewindow:
+            import time
+            print("Active window mode enabled.")
+            print("Please click on the window you want to capture within 5 seconds...")
+            print("\a", flush=True)  # Audio feedback
+            
+            # Wait for 5 seconds to allow user to select window
+            time.sleep(5)
+            
+            # Get the active window geometry
+            win = get_win_size()
+            if win:
+                bboxes.append([win[0], win[1], win[2], win[3]])
+                print(f"Active window captured: {win}")
+            else:
+                print("Could not determine active window.")
+            print("\a", flush=True)  # Audio feedback
+ 
         if args.title:
             from winzy_win_geometry import get_window_geometry_percentage
 
