@@ -34,7 +34,7 @@ To Get help, type.
 ```bash
 winzy screenshot -h
 
-usage: winzy screenshot [-h] [-b BBOX BBOX BBOX BBOX] [-ut] [-t TITLE]
+usage: winzy screenshot [-h] [-b BBOX BBOX BBOX BBOX] [-ut] [-t TITLE] [-aw]
 
 Screenshot using python
 
@@ -47,8 +47,18 @@ optional arguments:
   -t TITLE, --title TITLE
                         Create BBOX for the windows whose title is given. type
                         'none' to choose window
+  -aw, --activewindow   Capture the active window
 
 ```
+
+## Features
+
+- **Bounding Box Capture**: Define regions of interest using percentages (left, top, width, height)
+- **Multiple Regions**: Specify multiple `-b` flags to capture several areas at once
+- **Active Window Mode**: Use `--activewindow` to automatically capture the currently active window
+- **Window Title Targeting**: Use `--title` to capture specific windows by their title
+- **Temporary Directory**: Save screenshots to system temp directory with `--use-tempdir`
+- **Keyboard Controls**: Press `Right Shift` to capture, `Esc` twice to exit
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:
